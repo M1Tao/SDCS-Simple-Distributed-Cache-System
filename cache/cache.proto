@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package cache;
+
+option go_package = "./cache";
+
+// CacheService 定义了缓存服务的 gRPC 接口。
+service CacheService {
+  // Get 方法用于从缓存中获取数据。
+  rpc Get(GetRequest) returns (GetResponse) {}
+
+  // Set 方法用于将数据存储到缓存中。
+  rpc Set(SetRequest) returns (SetResponse) {}
+
+  // Delete 方法用于从缓存中删除数据。
+  rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+}
+
+// GetRequest 是 Get 方法的请求消息。
+message GetRequest {
+  string key = 1;
+}
+
+// GetResponse 是 Get 方法的响应消息。
+message GetResponse {
+  string value = 1;
+  bool found = 2;
+}
+
+// SetRequest 是 Set 方法的请求消息。
+message SetRequest {
+  string key = 1;
+  string value = 2;
+}
+
+// SetResponse 是 Set 方法的响应消息。
+message SetResponse {
+}
+
+// DeleteRequest 是 Delete 方法的请求消息。
+message DeleteRequest {
+  string key = 1;
+}
+
+// DeleteResponse 是 Delete 方法的响应消息。
+message DeleteResponse {
+  int32 deleted_count = 1;
+}
+
